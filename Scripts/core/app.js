@@ -1,30 +1,45 @@
 // core module (global) - IIFE - Immediayely-invoked Functin Expressions
 (function() {
   // App variables
-  let person;
-  let student;
-  /*
-  let Student = (function() {
-    function Student(name, age, studentID) {
-      objects.Person.call(this, name, age);
-      this._studentID = studentID;
+
+  function DisplayType(myArray, index) {
+    switch (typeof myArray[index]) {
+      case "number":
+        console.log(`Item: ${index}: is a number`);
+        break;
+
+      case "string":
+        console.log(`Item: ${index}: is a sting`);
+        break;
+
+      case "boolean":
+        console.log(`Item: ${index}: is a boolean`);
+        break;
+
+      case "object":
+        console.log(`Item: ${index}: is an object`);
+        break;
+
+      case "function":
+        console.log(`Item: ${index}: is a function`);
+        break;
+
+      default:
+        break;
     }
+  }
+  function Myfunction() {
+    //Arguments
+    //console.log(`Arguments Length: ${arguments.length}`); // argument is class, length is property
+    //console.log(arguments);
+    // Arguments on array
+    let myArray = Array.from(arguments);
 
-    //extends the Person class or inherit from the person class
-    Student.prototype = Object.create(objects.Person);
-    //Student.prototype.constructor = Student;
+    for (let index = 0; index < myArray.length; index++) {
+      DisplayType(myArray, index);
+    }
+  }
 
-    Student.prototype.saysHello = function() {
-      console.log(`${this._name} says Hello`);
-    };
-
-    Student.prototype.studies = function() {
-      console.log(`${this._name} is studying!`);
-    };
-
-    return Student;
-  })();
-*/
   /**
    * This function is used for Initialization
    *
@@ -34,9 +49,6 @@
       `%c App Initializing... `,
       "font-weight: bold; font-size: 20px;"
     );
-    //object creation also called instantiation
-    person = new objects.Person("Mashud", 38);
-    student = new objects.Student("Carol", 20, "123456789");
 
     Main();
   }
@@ -48,12 +60,7 @@
   function Main() {
     console.log(`%c App Started... `, "font-weight: bold; font-size: 20px;");
 
-    person.saysHello();
-
-    console.log(person);
-    console.log(student);
-    student.studies();
-    student.saysHello();
+    Myfunction(true, 5, "Mas", "Bob", true);
   }
 
   window.addEventListener("load", Start);
