@@ -12,10 +12,11 @@
 
   function RandomRange(min, max) {
     let randomNumber;
+    let maxminusmin = max - min + 1;
 
     //randomNumber = Math.random();
     //randomNumber = Math.random() * max;
-    randomNumber = Math.floor(Math.random() * max) + min;
+    randomNumber = Math.floor(Math.random() * maxminusmin) + min;
 
     return randomNumber;
   }
@@ -48,7 +49,7 @@
    *
    */
   function Main() {
-    console.log(`%c App Started... `, "font-weight: bold; font-size: 20px;");
+    // console.log(`%c App Started... `, "font-weight: bold; font-size: 20px;");
 
     let Roll;
 
@@ -69,13 +70,24 @@
     });
 
     minRange.addEventListener("input", function() {
+      min = parseInt(minRange.value);
+      max = parseInt(maxRange.value);
+      if (min > max) {
+        minRange.value = maxRange.value;
+        min = max;
+      }
+
       minRangeValue.innerHTML = minRange.value;
-      min = minRange.value;
     });
 
     maxRange.addEventListener("input", function() {
+      min = parseInt(minRange.value);
+      max = parseInt(maxRange.value);
+      if (max < min) {
+        maxRange.value = minRange.value;
+        max = min;
+      }
       maxRangeValue.innerHTML = maxRange.value;
-      max = maxRange.value;
     });
   }
 
