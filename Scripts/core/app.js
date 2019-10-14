@@ -1,43 +1,23 @@
 // core module (global) - IIFE - Immediayely-invoked Functin Expressions
 (function() {
   // App variables
+  let RollButton;
+  let Result;
+  let minRange;
+  let maxRange;
+  let minRangeValue;
+  let maxRangeValue;
+  let min;
+  let max;
 
-  function DisplayType(myArray, index) {
-    switch (typeof myArray[index]) {
-      case "number":
-        console.log(`Item: ${index}: is a number`);
-        break;
+  function RandomRange(min, max) {
+    let randomNumber;
 
-      case "string":
-        console.log(`Item: ${index}: is a sting`);
-        break;
+    //randomNumber = Math.random();
+    //randomNumber = Math.random() * max;
+    randomNumber = Math.floor(Math.random() * max) + min;
 
-      case "boolean":
-        console.log(`Item: ${index}: is a boolean`);
-        break;
-
-      case "object":
-        console.log(`Item: ${index}: is an object`);
-        break;
-
-      case "function":
-        console.log(`Item: ${index}: is a function`);
-        break;
-
-      default:
-        break;
-    }
-  }
-  function Myfunction() {
-    //Arguments
-    //console.log(`Arguments Length: ${arguments.length}`); // argument is class, length is property
-    //console.log(arguments);
-    // Arguments on array
-    let myArray = Array.from(arguments);
-
-    for (let index = 0; index < myArray.length; index++) {
-      DisplayType(myArray, index);
-    }
+    return randomNumber;
   }
 
   /**
@@ -50,6 +30,16 @@
       "font-weight: bold; font-size: 20px;"
     );
 
+    RollButton = document.getElementById("RollButton");
+    Result = document.getElementById("Result");
+
+    minRange = document.getElementById("minRange");
+    maxRange = document.getElementById("maxRange");
+    minRangeValue = document.getElementById("minRangeValue");
+    maxRangeValue = document.getElementById("maxRangeValue");
+    min = 1;
+    max = 6;
+
     Main();
   }
 
@@ -60,8 +50,39 @@
   function Main() {
     console.log(`%c App Started... `, "font-weight: bold; font-size: 20px;");
 
-    Myfunction(true, 5, "Mas", "Bob", true);
+    let Roll;
+
+    Result.innerHTML = "0";
+
+    minRangeValue.innerHTML = min;
+    maxRangeValue.innerHTML = max;
+
+    RollButton.addEventListener("click", function() {
+      Roll = RandomRange(min, max);
+      Result.innerHTML = Roll;
+      Result.style.fontSize = "25px";
+
+      console.log(
+        `%cGenerated Number: ${Roll}`,
+        "font-weight: bold; font-size: 20px; color: green;"
+      );
+    });
+
+    minRange.addEventListener("input", function() {
+      minRangeValue.innerHTML = minRange.value;
+      min = minRange.value;
+    });
+
+    maxRange.addEventListener("input", function() {
+      maxRangeValue.innerHTML = maxRange.value;
+      max = maxRange.value;
+    });
   }
+
+  console.log(
+    `%cGenerated Random Number : ${RandomRange(1, 6)}`,
+    "font-weight: bold; font-size: 20px; color: green;"
+  );
 
   window.addEventListener("load", Start);
 })();
